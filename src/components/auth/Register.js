@@ -1,6 +1,6 @@
 import React, { useRef, useContext } from "react"
-import { Link, useHistory } from "react-router-dom"
-import { GamerContext } from "../gamer/GamerProvider"
+import { Link, useNavigate } from "react-router-dom"
+import { ApplicantContext } from "../applicant/ApplicantProvider"
 import "./Auth.css"
 
 export const Register = () => {
@@ -11,8 +11,8 @@ export const Register = () => {
     const password = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
-    const history = useHistory()
-    const getCurrentGamer = useContext(GamerContext)
+    const history = useNavigate()
+    const getCurrentApplicnat = useContext(ApplicantContext)
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -38,7 +38,7 @@ export const Register = () => {
                 .then(res => {
                     if ("token" in res) {
                         localStorage.setItem("lu_token", res.token)
-                        getCurrentGamer()
+                        getCurrentApplicnat()
                         history.push("/")
                     }
                 })

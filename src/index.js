@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Route } from "react-router-dom";
 import './index.css';
-import App from './App';
+import {CVables} from './CV_ables'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  
+    <React.StrictMode>
+    
+      <Route>
+        <CVables />
+      </Route>
+   
+    </React.StrictMode>
+  ,
   document.getElementById('root')
 );
 

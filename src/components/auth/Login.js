@@ -1,6 +1,5 @@
-import React, { useRef, useContext } from "react"
-import { Link, useHistory } from "react-router-dom"
-import { GamerContext } from "../gamer/GamerProvider"
+import React, { useRef } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import "./Auth.css"
 
 
@@ -8,7 +7,7 @@ export const Login = () => {
     const username = useRef()
     const password = useRef()
     const invalidDialog = useRef()
-    const history = useHistory()
+    const history = useNavigate()
     
 
     const handleLogin = (e) => {
