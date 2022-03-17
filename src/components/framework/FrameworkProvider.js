@@ -6,7 +6,7 @@ export const FrameworkProvider = (props) => {
   const [frameworks, setFramework] = useState([]);
 
   const getFrameworks = () => {
-    return fetch("http://localhost:8000/languages", {
+    return fetch("http://localhost:8000/frameworks", {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },
