@@ -1,6 +1,5 @@
-import React, { useRef, useContext } from "react"
-import { Link, useHistory } from "react-router-dom"
-import { GamerContext } from "../gamer/GamerProvider"
+import React, { useRef } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import "./Auth.css"
 
 
@@ -8,7 +7,7 @@ export const Login = () => {
     const username = useRef()
     const password = useRef()
     const invalidDialog = useRef()
-    const history = useHistory()
+    const history = useNavigate()
     
 
     const handleLogin = (e) => {
@@ -29,7 +28,7 @@ export const Login = () => {
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
                     localStorage.setItem("lu_token", res.token)
-                    history.push("/")
+                    history("/")
                 }
                 else {
                     invalidDialog.current.showModal()
@@ -48,8 +47,8 @@ export const Login = () => {
                     <h1>Level Up</h1>
                     <h2>Please sign in</h2>
                     <fieldset>
-                        <label htmlFor="inputUsername"> Username address </label>
-                        <input ref={username} type="username" id="username" className="form-control" placeholder="Username address" required autoFocus />
+                        <label htmlFor="inputUsername"> Username </label>
+                        <input ref={username} type="username" id="username" className="form-control" placeholder="Username" required autoFocus />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="inputPassword"> Password </label>
