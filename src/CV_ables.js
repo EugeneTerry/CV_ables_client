@@ -7,40 +7,33 @@ import { Register } from "./components/auth/Register";
 // import { Wrapper } from "./Styles/Global";
 import { ApplicantProvider } from "./components/applicant/ApplicantProvider";
 
-export const CVables = () => (
-
+export const CVables = () => {
+const Home = () => {
+  if (localStorage.getItem("lu_token")) {
+    return (
+      <>
+          <NavBar />
+          <ApplicationViews />
+      </>
+    );
+  } else {
+    return <Navigate to="/login" />;
+  }
+}
 		// <Wrapper>
-			<ApplicantProvider>
-				<Routes>
-        <Route
-					render={() => {
-						if (localStorage.getItem("lu_token")) {
-							return (
-								<>
-               
-									<Route>
-										<NavBar />
-										<ApplicationViews />
-									</Route>
-
-								</>
-							);
-						} else {
-							return <Navigate to="/login" />;
-						}
-					}}
-				/>
-        </Routes>
-				<Routes path="/login">
-					<Login />
-				</Routes>
-
-				<Routes path="/register">
-					<Register />
-				</Routes>
+			return<ApplicantProvider>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
         
+          <Route element={<Login/>} path="/login"/>
+
+          <Route element={'this is home'} path="/"/>
+            
+          <Route element={<Register/>} path="/register"/>
+
+        </Routes>
 			</ApplicantProvider>
 		// </Wrapper>
     
   
-);
+};

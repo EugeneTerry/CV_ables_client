@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import './index.css';
 import {CVables} from './CV_ables'
 import reportWebVitals from './reportWebVitals';
@@ -9,9 +9,9 @@ ReactDOM.render(
   
     <React.StrictMode>
     
-      <Route>
+      <Router>
         <CVables />
-      </Route>
+      </Router>
    
     </React.StrictMode>
   ,
