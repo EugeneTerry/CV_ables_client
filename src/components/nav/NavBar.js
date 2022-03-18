@@ -8,25 +8,32 @@ export const NavBar = () => {
         
         <ul className="navbar">
             <li className="navbar__item">
+                <Link className="navbar__link" to="/profile">
+                    <h3>Profile</h3>
+                </Link>  
+            </li>
+            <li className="navbar__item">
+                <Link className="navbar__link" to="/educations">
+                    <h3>Education</h3>
+                </Link>
+            </li>
+            <li className="navbar__item">
                 
-                <Link className="navbar__link" to="/games">
+                <Link className="navbar__link" to="/">
                     <h3>Vitas</h3>
                 </Link>
             </li>
-            <li className="navbar__item">
-                <Link className="navbar__link" to="/events">
-                    <h3>Languages</h3>
-                </Link>
-            </li>
-            <li className="navbar__item">
-                <Link className="navbar__link" to="/profile">
-                    <h3>Profile</h3>
-                </Link>
-                
 
+
+            <li className="navbar__item">
+                <Link className="navbar__link" to="/langframes">
+                    <h3>Frames/Lang</h3>
+                </Link>
             </li>
             <li className="navbar__item">
-                <h3>Navigation Link</h3>
+                <Link className="navbar__link" to="/missions">
+                    <h3>Missions</h3>
+                </Link>
             </li>
             {
                 (localStorage.getItem("lu_token") !== null) ?
