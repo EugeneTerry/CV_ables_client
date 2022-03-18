@@ -17,7 +17,13 @@ import { JobTypeList } from "./components/jobtype/JobtypeList";
 import { MissionProvider } from "./components/mission/MissionProvider";
 import { MissionList } from "./components/mission/MissionList";
 import { VitaList } from "./components/vita/VitaList";
+import { VitaForm } from "./components/vita/VitaForm";
 import { VitaProvider } from "./components/vita/VitaProvider";
+import { ProspectProvider } from "./components/prospect/ProspectProvider";
+import { ProspectList } from "./components/prospect/ProspectList";
+import { ProspectForm } from "./components/prospect/ProspectForm";
+import { EducationForm } from "./components/education/EducationForm";
+import { ExperienceForm } from "./components/experience/ExperienceForm";
 
 export const ApplicationViews = () => {
   return (
@@ -38,19 +44,36 @@ export const ApplicationViews = () => {
           </Routes>
           <Routes>
               <Route element={<VitaList/>} path="/vitas"/>
-          </Routes>          
+          </Routes>
+          <Routes>
+              <Route element={<VitaForm/>} path="/vitas/new"/>
+          </Routes>
+          <ProspectProvider>
+          <Routes>
+              <Route element={<ProspectForm/>} path="/prospects/new"/>
+          </Routes>
+            <Routes>
+                <Route element={<ProspectList/>} path="/prospects"/>
+            </Routes>
+          </ProspectProvider> 
+        <JobTypeProvider>
         <ExperienceProvider>
           <Routes>
                 <Route element={<ExperienceList/>} path="/experiences"/>
           </Routes>
+          <Routes>
+                <Route element={<ExperienceForm/>} path="/experiences/new"/>
+          </Routes>
         </ExperienceProvider>
-        <JobTypeProvider>
           <Routes>
           <Route element={<JobTypeList/>} path="/jobtypes"/>
           </Routes>
         </JobTypeProvider>
           <Routes>
               <Route element={<EducationList/>} path="/educations"/>
+          </Routes>
+          <Routes>
+              <Route element={<EducationForm/>} path="/educations/new"/>
           </Routes>
         <MissionProvider>
           <Routes>

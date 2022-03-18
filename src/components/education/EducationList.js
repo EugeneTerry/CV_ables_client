@@ -20,7 +20,6 @@ export const EducationList = (props) => {
                 <div className="description__text">
                 {education.school_name}
                 <ul>{education.city}{" "}{education.state}.</ul> 
-                
                 <ul>Degree:{" "}{education.diploma}</ul>
                 <ul>Year Graduated:{" "}{education.grad_year}</ul>
 
