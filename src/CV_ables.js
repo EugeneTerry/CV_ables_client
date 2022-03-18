@@ -23,11 +23,11 @@ const Home = () => {
 		// <Wrapper>
 			return<ApplicantProvider>
         <Routes>
-          <Route path='/' element={<Home/>}/>
+          <Route path='*' element={<Home/>}/>
         
           <Route element={<Login/>} path="/login"/>
 
-          <Route element={'this is home'} path="/"/>
+          <Route element={'this is home'} path="*"/>
             
           <Route element={<Register/>} path="/register"/>
 
