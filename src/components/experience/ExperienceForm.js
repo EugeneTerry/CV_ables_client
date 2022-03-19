@@ -44,7 +44,7 @@ export const ExperienceForm = () => {
         }
 
     },[experienceId]) 
-console.log(currentExperience.jobtype_id)
+
       return (
         <form>
              <h2 className="experienceForm__name">

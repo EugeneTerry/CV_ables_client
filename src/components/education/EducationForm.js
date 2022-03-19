@@ -1,10 +1,11 @@
-import React, {useContext, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { EducationContext } from "./EducationProvider";
 
 export const EducationForm = () => {
     const history = useNavigate();
-    const { addEducation } = useContext(EducationContext);
+    const { addEducation, getEducationById, editEducation } = useContext(EducationContext);
+    const { educationId } = useParams()
 
     const [currentEducation, setCurrentEducation] = useState({
         applicant_id: parseInt(localStorage.getItem("lu_token")),
@@ -19,35 +20,52 @@ export const EducationForm = () => {
         const newEducationState = { ...currentEducation };
         newEducationState[key] = e.target.value;
         setCurrentEducation(newEducationState);
-      };
-      return (
+    };
+    useEffect(() => {
+        if (educationId) {
+            getEducationById(educationId).then((data) => {
+                setCurrentEducation(prevState => ({
+                    ...prevState,
+                    school_name: data.school_name,
+                    city: data.city,
+                    state: data.state,
+                    grad_year: data.grad_year,
+                    diploma: data.diploma
+                }))
+            })
+
+        }
+    }, [educationId])
+    return (
         <form>
-             <h2 className="educationForm__name">Create New Vita</h2>
+            <h2 className="educationForm__name">
+                {educationId ? 'Edit' : 'Create'} School
+            </h2>
             <fieldset>
-            <div className="form-group">
-                <label htmlFor="name">School Name: </label>
-                <input
-                type="text"
-                name="school_name"
-                required
-                autoFocus
-                className="form-control"
-                value={currentEducation.school_name}
-                onChange={changeEducationState}
-                />
-            </div>
+                <div className="form-group">
+                    <label htmlFor="name">School Name: </label>
+                    <input
+                        type="text"
+                        name="school_name"
+                        required
+                        autoFocus
+                        className="form-control"
+                        value={currentEducation.school_name}
+                        onChange={changeEducationState}
+                    />
+                </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="city">City: </label>
                     <input
-                    type="text"
-                    name="city"
-                    required
-                    autoFocus
-                    className="form-control"
-                    value={currentEducation.city}
-                    onChange={changeEducationState}
+                        type="text"
+                        name="city"
+                        required
+                        autoFocus
+                        className="form-control"
+                        value={currentEducation.city}
+                        onChange={changeEducationState}
                     />
                 </div>
             </fieldset>
@@ -55,13 +73,13 @@ export const EducationForm = () => {
                 <div className="form-group">
                     <label htmlFor="state">State: </label>
                     <input
-                    type="text"
-                    name="state"
-                    required
-                    autoFocus
-                    className="form-control"
-                    value={currentEducation.state}
-                    onChange={changeEducationState}
+                        type="text"
+                        name="state"
+                        required
+                        autoFocus
+                        className="form-control"
+                        value={currentEducation.state}
+                        onChange={changeEducationState}
                     />
                 </div>
             </fieldset>
@@ -69,13 +87,13 @@ export const EducationForm = () => {
                 <div className="form-group">
                     <label htmlFor="grad_year">Graduating Year: </label>
                     <input
-                    type="text"
-                    name="grad_year"
-                    required
-                    autoFocus
-                    className="form-control"
-                    value={currentEducation.grad_year}
-                    onChange={changeEducationState}
+                        type="text"
+                        name="grad_year"
+                        required
+                        autoFocus
+                        className="form-control"
+                        value={currentEducation.grad_year}
+                        onChange={changeEducationState}
                     />
                 </div>
             </fieldset>
@@ -83,35 +101,34 @@ export const EducationForm = () => {
                 <div className="form-group">
                     <label htmlFor="diploma">Degree: </label>
                     <input
-                    type="text"
-                    name="diploma"
-                    required
-                    autoFocus
-                    className="form-control"
-                    value={currentEducation.diploma}
-                    onChange={changeEducationState}
+                        type="text"
+                        name="diploma"
+                        required
+                        autoFocus
+                        className="form-control"
+                        value={currentEducation.diploma}
+                        onChange={changeEducationState}
                     />
                 </div>
             </fieldset>
-            <button 
-            type="submit"
-            onClick={(evt) => {
-                evt.preventDefault();
+            <button
+                type="submit"
+                onClick={(evt) => {
+                    evt.preventDefault();
 
-                const event = {
-                    applicant_id: parseInt(localStorage.getItem("lu_token")),
-                    school_name: currentEducation.school_name,
-                    city: currentEducation.city,
-                    state: currentEducation.state,
-                    grad_year: currentEducation.grad_year,
-                    diploma: currentEducation.diploma
-                };
-
-                addEducation(event).then(() => history("/educations"));
-            }}
-            className="gen_button"
+                    const event = {
+                        ...currentEducation,
+                        applicant_id: parseInt(localStorage.getItem("lu_token")),
+                    };
+                    if (educationId) {
+                        editEducation({ ...event, id: educationId }).then(() => history("/educations"));
+                    } else {
+                        addEducation(event).then(() => history("/educations"));
+                    }
+                }}
+                className="gen_button"
             >
-                Add School
+                {educationId ? 'Edit' : 'Create'} School
             </button>
         </form>
     )

@@ -64,6 +64,7 @@ export const ApplicationViews = () => {
                         <Route element={<JobTypeList />} path="/jobtypes" />
                         <Route element={<EducationList />} path="/educations" />
                         <Route element={<EducationForm />} path="/educations/new" />
+                        <Route element={<EducationForm />} path="/educations/edit/:educationId" />
                         <Route element={<MissionList />} path="/missions" />
                       </Routes>
                       
