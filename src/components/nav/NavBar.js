@@ -29,8 +29,12 @@ export const NavBar = () => {
                     <h3>Vitas</h3>
                 </Link>
             </li>
-
-
+            <li className="navbar__item">
+                
+                <Link className="navbar__link" to="/prospects">
+                    <h3>Prospects</h3>
+                </Link>
+            </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/langframes">
                     <h3>Frames/Lang</h3>

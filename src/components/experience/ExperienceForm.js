@@ -1,13 +1,15 @@
 import React, {useContext, useEffect, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ExperienceContext } from "./ExperienceProvider";
 import { JobTypeContext } from "../jobtype/JobtypeProvider";
 
 
 export const ExperienceForm = () => {
     const history = useNavigate();
-    const { addExperience } = useContext(ExperienceContext);
+    const { addExperience, getExperienceById, editExperience } = useContext(ExperienceContext);
     const { jobtypes, getJobTypes } = useContext(JobTypeContext);
+    const { experienceId } = useParams()
+
     const [currentExperience, setCurrentExperience] = useState({
         job_title: "",
         company: "",
@@ -15,21 +17,38 @@ export const ExperienceForm = () => {
         start_yr: "",
         end_yr: ""
     });
-
-    useEffect(() => {
-        getJobTypes()
-    }, []);
-
-
     const changeExperienceState = (e) => {
         const key = e.target.name;
         const newExperienceState = { ...currentExperience };
         newExperienceState[key] = e.target.value;
         setCurrentExperience(newExperienceState);
-      };
+    };
+    useEffect(()=>{
+        getJobTypes();
+    }, []);
+
+    useEffect(()=> {
+        if (experienceId){
+            getExperienceById(experienceId).then((data) =>{
+                setCurrentExperience(prevState =>({
+                    ...prevState,
+                    job_title: data.job_title,
+                    company: data.company,
+                    jobtype_id: data.job_type.id,
+                    start_yr: data.start_yr,
+                    end_yr: data.end_yr
+
+                }))
+            })
+
+        }
+
+    },[experienceId]) 
+console.log(currentExperience.jobtype_id)
       return (
         <form>
-             <h2 className="experienceForm__name">Create New Experience</h2>
+             <h2 className="experienceForm__name">
+             {experienceId? 'Edit': 'Create'} Experience</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="company">Company: </label>
@@ -118,20 +137,17 @@ export const ExperienceForm = () => {
                 const event = {
                      ...currentExperience, 
                     applicant_id: parseInt(localStorage.getItem("lu_token")),
-                    // created a spread opperator to send everything below to data
-                    // job_title: currentExperience.job_title,
-                    // company: currentExperience.company,
-                    // jobtype_id: currentExperience.jobtype_id,
-                    // start_yr: currentExperience.start_yr,
-                    // end_yr: currentExperience.end_yr
-
                 };
-                addExperience(event).then(() => history("/experiences"));
+                if (experienceId){
+                    editExperience({...event, id: experienceId}).then(() => history("/experiences"));
+                }else{
+                    addExperience(event).then(() => history("/experiences"));
+                }
             }}
             className="gen_button"
             >
-                Add Experience
-            </button>
+                {experienceId? 'Edit': 'Create'} Prospect
+                </button>
         </form>
     )
 

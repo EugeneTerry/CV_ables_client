@@ -21,91 +21,73 @@ import { VitaForm } from "./components/vita/VitaForm";
 import { VitaProvider } from "./components/vita/VitaProvider";
 import { ProspectProvider } from "./components/prospect/ProspectProvider";
 import { ProspectList } from "./components/prospect/ProspectList";
-import { ProspectForm } from "./components/prospect/ProspectForm";
 import { EducationForm } from "./components/education/EducationForm";
 import { ExperienceForm } from "./components/experience/ExperienceForm";
 import { EducationVitaProvider } from "./components/education/EducationVitaProvider";
 import { ProspectCreate } from "./components/prospect/ProspectCreate";
 export const ApplicationViews = () => {
   return (
-    
+
     <main
       style={{
         margin: "5rem 2rem",
         backgroundColor: "#dcf2e2",
         lineHeight: "1.75rem",
       }}
-      >
-      
+    >
+
       <ApplicantProvider>
         <EducationVitaProvider>
-        <EducationProvider>
-        <JobTypeProvider>
-        <MissionProvider>
-        <ProspectProvider>
-        <VitaProvider>
-          <Routes>
-              <Route element={<ApplicantList/>} path="/profile"/>
-          </Routes>
-          <Routes>
-              <Route element={<VitaList/>} path="/vitas"/>
-          </Routes>
-          <Routes>
-              <Route element={<VitaForm/>} path="/vitas/new"/>
-          </Routes>
-          <Routes>
-              <Route element={<ProspectForm/>} path="/prospects/edit/:prospectId(d+)"/>
-          </Routes>
-          <Routes>
-              <Route element={<ProspectCreate/>} path="/prospects/new"/>
-          </Routes>
-            <Routes>
-                <Route element={<ProspectList/>} path="/prospects"/>
-            </Routes>
-        <ExperienceProvider>
-          <Routes>
-                <Route element={<ExperienceList/>} path="/experiences"/>
-          </Routes>
-          <Routes>
-                <Route element={<ExperienceForm/>} path="/experiences/new"/>
-          </Routes>
-        </ExperienceProvider>
-          <Routes>
-          <Route element={<JobTypeList/>} path="/jobtypes"/>
-          </Routes>
-          <Routes>
-              <Route element={<EducationList/>} path="/educations"/>
-          </Routes>
-          <Routes>
-              <Route element={<EducationForm/>} path="/educations/new"/>
-          </Routes>
-          <Routes>
-                  <Route element={<MissionList/>} path="/missions"/>
-          </Routes>
-        <DescriptionProvider>
-          <Routes>
-                <Route element={<DescriptionList/>} path="/descriptions"/>
-          </Routes>
-        <LanguageProvider>
-          <FrameworkProvider>
-            <Routes>
-                <Route element={<FrameworkList/>} path="/langframes"/> 
-            </Routes>
-          </FrameworkProvider>
-            <Routes>
-                <Route element={<LanguageList/>} path="/languages"/>
-            </Routes>  
-        </LanguageProvider>
-        </DescriptionProvider>
-        </VitaProvider>
-        </ProspectProvider> 
-        </MissionProvider>
-        </JobTypeProvider>
-        </EducationProvider>
+          <EducationProvider>
+            <JobTypeProvider>
+              <MissionProvider>
+                <ProspectProvider>
+                  <VitaProvider>
+                    <Routes>
+                      <Route element={<ApplicantList />} path="/profile" />
+                      <Route element={<VitaList />} path="/vitas" />
+                      <Route element={<VitaForm />} path="/vitas/new" />
+                      <Route element={<ProspectCreate />} path="/prospects/edit/:prospectId" />
+                      <Route element={<ProspectCreate />} path="/prospects/new" />
+                      <Route element={<ProspectList />} path="/prospects" />
+                    </Routes>
+
+                      <ExperienceProvider>
+                        <Routes>
+                          <Route element={<ExperienceList />} path="/experiences" />
+                          <Route element={<ExperienceForm />} path="/experiences/new" />
+                          <Route element={<ExperienceForm />} path="/experiences/edit/:experienceId" />
+                        </Routes>
+                      </ExperienceProvider>
+                      
+                      <Routes>
+                        <Route element={<JobTypeList />} path="/jobtypes" />
+                        <Route element={<EducationList />} path="/educations" />
+                        <Route element={<EducationForm />} path="/educations/new" />
+                        <Route element={<MissionList />} path="/missions" />
+                      </Routes>
+                      
+                      <DescriptionProvider>
+                        <LanguageProvider>
+                          <FrameworkProvider>
+                          <Routes> 
+                            <Route element={<DescriptionList />} path="/descriptions" />
+                            <Route element={<FrameworkList />} path="/langframes" />
+                            <Route element={<LanguageList />} path="/languages" />
+                          </Routes>
+                          </FrameworkProvider>
+                        </LanguageProvider>
+                      </DescriptionProvider>
+                      
+                    
+                  </VitaProvider>
+                </ProspectProvider>
+              </MissionProvider>
+            </JobTypeProvider>
+          </EducationProvider>
         </EducationVitaProvider>
       </ApplicantProvider>
     </main>
 
   );
 };
-  

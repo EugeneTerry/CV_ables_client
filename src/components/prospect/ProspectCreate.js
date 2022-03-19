@@ -1,10 +1,11 @@
-import React, {useContext, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useContext, useEffect, useState} from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { ProspectContext } from "./ProspectProvider";
 
 export const ProspectCreate = () => {
     const history = useNavigate();
-    const { addProspect } = useContext(ProspectContext);
+    const { addProspect, getProspectById, editProspect } = useContext(ProspectContext);
+    const { prospectId } = useParams()
 
     const [currentProspect, setCurrentProspect] = useState({
         applicant_id: parseInt(localStorage.getItem("lu_token")),
@@ -16,10 +17,26 @@ export const ProspectCreate = () => {
         const newProspectState = { ...currentProspect };
         newProspectState[key] = e.target.value;
         setCurrentProspect(newProspectState);
-      };
+    };
+
+    useEffect(()=> {
+        if (prospectId){
+            getProspectById(prospectId).then((data) =>{
+                setCurrentProspect(prevState =>({
+                    ...prevState,
+                    listing_url: data.listing_url,
+                    prospect_name: data.prospect_name
+                }))
+            })
+
+        }
+
+    },[prospectId]) 
+
       return (
         <form>
-             <h2 className="prospectForm__name">Create New Vita</h2>
+             <h2 className="prospectForm__name"> 
+              {prospectId? 'Edit': 'Create'} Prospect</h2>
             <fieldset>
             <div className="form-group">
                 <label htmlFor="name">Company: </label>
@@ -58,12 +75,17 @@ export const ProspectCreate = () => {
                     prospect_name: currentProspect.prospect_name,
                     listing_url: currentProspect.listing_url,
                 };
+                
+                if (prospectId){
+                    editProspect({...event, id: prospectId}).then(() => history("/prospects"));
 
-                addProspect(event).then(() => history("/prospects"));
+                }else{
+                    addProspect(event).then(() => history("/prospects"));
+                }
             }}
             className="gen_button"
             >
-                Create Prospect
+                {prospectId? 'Edit': 'Create'} Prospect
             </button>
         </form>
     )
