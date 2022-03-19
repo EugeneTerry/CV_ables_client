@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { EducationContext } from "./EducationProvider";
 
 export const EducationList = (props) => {
-  const{ educations, getEducations} = useContext(EducationContext);
+  const{ educations, getEducations, deleteEducation} = useContext(EducationContext);
+  const history = useNavigate()
 
 
   useEffect(() => {
@@ -12,6 +14,7 @@ export const EducationList = (props) => {
   return (
     <article className="education__wrapper">
         <h1>Education</h1>
+        <button onClick={() => history(`/educations/new/`)}>Add Education</button>
         <div className="education__stack">
         {educations.map((education) => {
           return (
@@ -23,7 +26,9 @@ export const EducationList = (props) => {
                 <ul>Degree:{" "}{education.diploma}</ul>
                 <ul>Year Graduated:{" "}{education.grad_year}</ul>
 
-                <br></br>
+              <button onClick={() => history(`/educations/edit/${education.id}`)}>Edit</button>
+              <button onClick={() => deleteEducation(education.id)}>Delete</button>
+            
                 </div>
               </section>
             </div>

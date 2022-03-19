@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { ExperienceContext } from "./ExperienceProvider"; 
 
 export const ExperienceList = (props) => {
-  const{ experiences, getExperiences} = useContext(ExperienceContext);
-
+  const{ experiences, getExperiences,deleteExperience} = useContext(ExperienceContext);
+  const history = useNavigate()
 
   useEffect(() => {
     getExperiences();
@@ -12,6 +13,7 @@ export const ExperienceList = (props) => {
   return (
     <article className="experience__wrapper">
         <h1>Experiences</h1>
+        <button onClick={() => history(`/experiences/new/`)}>Add Experience</button>
         <div className="experience__stack">
         {experiences.map((experience) => {
           return (
@@ -25,6 +27,8 @@ export const ExperienceList = (props) => {
                 <br></br>
                 </div>
               </section>
+              <button onClick={() => history(`/experiences/edit/${experience.id}`)}>Edit</button>
+              <button onClick={() => deleteExperience(experience.id)}>Delete</button>
             </div>
           );
         })}
