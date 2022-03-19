@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { MissionContext } from "./MissionProvider";
 
 export const MissionList = (props) => {
-  const{ missions, getMissions} = useContext(MissionContext);
+  const{ missions, getMissions, deleteMission} = useContext(MissionContext);
+  const history = useNavigate()
 
 
   useEffect(() => {
@@ -12,6 +14,7 @@ export const MissionList = (props) => {
   return (
     <article className="mission__wrapper">
         <h1>Missions</h1>
+        <button onClick={() => history(`/missions/new/`)}>Add Mission</button>
         <div className="mission__stack">
         {missions.map((mission) => {
           return (
@@ -23,6 +26,9 @@ export const MissionList = (props) => {
                 <br></br>
                 </div>
               </section>
+              <button onClick={() => history(`/missions/edit/${mission.id}`)}>Edit</button>
+              <button onClick={() => deleteMission(mission.id)}>Delete</button>
+            
             </div>
           );
         })}

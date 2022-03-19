@@ -13,6 +13,7 @@ export const ExperienceForm = () => {
     const [currentExperience, setCurrentExperience] = useState({
         job_title: "",
         company: "",
+        duties: "",
         jobtype_id: "",
         start_yr: "",
         end_yr: ""
@@ -36,7 +37,8 @@ export const ExperienceForm = () => {
                     company: data.company,
                     jobtype_id: data.job_type.id,
                     start_yr: data.start_yr,
-                    end_yr: data.end_yr
+                    end_yr: data.end_yr,
+                    duties: data.duties
 
                 }))
             })
@@ -125,6 +127,21 @@ export const ExperienceForm = () => {
                     autoFocus
                     className="form-control"
                     value={currentExperience.end_yr}
+                    onChange={changeExperienceState}
+                    />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="duties_text">Your Duties: </label>
+                    <textarea
+                    type="text"
+                    name="duties"
+                    required
+                    autoFocus
+                    className="form-control"
+                    style={{height: "115px"}}
+                    value={currentExperience.duties}
                     onChange={changeExperienceState}
                     />
                 </div>

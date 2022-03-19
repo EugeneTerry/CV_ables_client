@@ -15,6 +15,7 @@ import { ExperienceProvider } from "./components/experience/ExperienceProvider";
 import { JobTypeProvider } from "./components/jobtype/JobtypeProvider";
 import { JobTypeList } from "./components/jobtype/JobtypeList";
 import { MissionProvider } from "./components/mission/MissionProvider";
+import { MissionForm } from "./components/mission/MissionForm";
 import { MissionList } from "./components/mission/MissionList";
 import { VitaList } from "./components/vita/VitaList";
 import { VitaForm } from "./components/vita/VitaForm";
@@ -66,6 +67,10 @@ export const ApplicationViews = () => {
                         <Route element={<EducationForm />} path="/educations/new" />
                         <Route element={<EducationForm />} path="/educations/edit/:educationId" />
                         <Route element={<MissionList />} path="/missions" />
+                        <Route element={<MissionForm />} path="/missions/new" />
+                        <Route element={<MissionForm />} path="/missions/edit/:missionId" />
+
+
                       </Routes>
                       
                       <DescriptionProvider>

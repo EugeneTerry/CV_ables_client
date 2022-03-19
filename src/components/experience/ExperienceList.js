@@ -24,6 +24,7 @@ export const ExperienceList = (props) => {
                 <ul>Title:{" "}{experience.job_title}</ul> 
                 <ul>Job Type:{" "}{experience.job_type.label}</ul>
                 <ul>From:{" "}{experience.start_yr} to {experience.end_yr}</ul>
+                <ul>Duties:{" "}{experience.duties}</ul>
                 <br></br>
                 </div>
               </section>
