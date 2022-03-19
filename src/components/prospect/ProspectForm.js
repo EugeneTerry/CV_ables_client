@@ -1,23 +1,44 @@
-import React, {useContext, useState} from "react";
-import { useNavigate } from "react-router-dom";
-import { ProspectContext } from "./ProspectProvider";
+import React, {useContext, useState, useEffect} from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ProspectContext } from "../project1/ProspectProvider";
 
 export const ProspectForm = () => {
     const history = useNavigate();
-    const { addProspect } = useContext(ProspectContext);
 
-    const [currentProspect, setCurrentProspect] = useState({
-        applicant_id: parseInt(localStorage.getItem("lu_token")),
-        listing_url: "",
-        prospect_name: ""
-    });
+    const[prospect, setProspects] = useState ([])
+    const {theProspect, setTheProspect} = useState({prospect_name: '', listing_url: ''});
+    const { newProspect, setNewProspect } = useState({})
+    const {prospects, getProspects, editProspect} = useContext(ProspectContext)
+    const { prospectId } = useParams()
+
+    useEffect(() => {
+        getProspects().then((data) => setProspects(data))
+    }, [])
+
+    useEffect(() => {
+        const theProspect = prospects.find(prospect => prospect.id === parseInt(prospectId)) || {prospect_name: '', listing_url: ''}
+        setTheProspect(theProspect)
+    }, [prospects, prospectId]);
+
+
     const changeProspectState = (e) => {
-        const key = e.target.name;
-        const newProspectState = { ...currentProspect };
-        newProspectState[key] = e.target.value;
-        setCurrentProspect(newProspectState);
+        newProspect[e.target.name] = e.target.value
+        setNewProspect(newProspect)
       };
+
+    const saveProspectState = (e) => {
+        e.preventDefault()
+
+        editProspect({
+            id: theProspect.id,
+            prospect_name: theProspect.prospect_name,
+            listing_url: setTheProspect.listing_url
+        }).then(() =>{
+            history('/prospects')
+        })
+    }
       return (
+        <div className="edit_prospect">
         <form>
              <h2 className="prospectForm__name">Create New Vita</h2>
             <fieldset>
@@ -29,7 +50,7 @@ export const ProspectForm = () => {
                 required
                 autoFocus
                 className="form-control"
-                value={currentProspect.prospect_name}
+                value={theProspect.prospect_name}
                 onChange={changeProspectState}
                 />
             </div>
@@ -43,30 +64,15 @@ export const ProspectForm = () => {
                 required
                 autoFocus
                 className="form-control"
-                value={currentProspect.listing_url}
+                value={theProspect.listing_url}
                 onChange={changeProspectState}
                 />
             </div>
             </fieldset>
-
-            <button 
-            type="submit"
-            onClick={(evt) => {
-                evt.preventDefault();
-
-                const event = {
-                    applicant_id: parseInt(localStorage.getItem("lu_token")),
-                    prospect_name: currentProspect.prospect_name,
-                    listing_url: currentProspect.listing_url,
-                };
-
-                addProspect(event).then(() => history("/prospects"));
-            }}
-            className="gen_button"
-            >
-                Create Prospect
-            </button>
         </form>
+        <button className='prospect_edit--save' onClick={saveProspectState}>Save</button>
+        <button className='prospect_edit--cancel' onClick={() => {history('/prospects')}}>Cancel</button>
+        </div>
     )
 
 }
