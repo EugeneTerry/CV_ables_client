@@ -2,9 +2,15 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: left;
+    background-color: rgb(220, 242, 226);
 }
 
 .navbar__item {
     flex-basis: 20%;
     list-style-type: none;
+}
+
+.nav-linkLink{
+    background-color: rgb(220, 242, 226);
+    border-radius:18pt
 }

@@ -7,18 +7,13 @@ export const VitaList = (props) => {
   const { vitas, getVitas } = useContext(VitaContext);
   const { educations, getEducations } = useContext(EducationContext);
   const{ educationvitas, getEducationVitas} = useContext(EducationVitaContext);
-  const currentUserId = sessionStorage.getItem("lu_token");
-  const [filterVita, setFiltered] = useState([])
+
 
   useEffect(() => {
     getVitas();
     getEducations();
-    // getEducationVitas();
+    getEducationVitas();
   }, []);
-
-  const currentUserVita = filterVita.filter(vita => {
-    return vita.applicant_id === parseInt(currentUserId)
-  })
 
   // useEffect(() => {
   //   setFiltered(vitas)
@@ -45,7 +40,7 @@ export const VitaList = (props) => {
                 </div>
               </section>
               <div>
-              <ul><h3>Education</h3></ul>
+              {/* <ul><h3>Education</h3></ul>
               </div>
               <div className="education__stack">
                 {educations.map((education) => {
@@ -64,7 +59,7 @@ export const VitaList = (props) => {
                       </div>
                     </div>
                   );
-                })}
+                })} */}
                 <ul>Job Listing:{" "}{vita.prospect.listing_url}</ul>
               </div>
               <div className="educationvita__stack">
@@ -80,7 +75,7 @@ export const VitaList = (props) => {
                           <br></br>
                         </div>
                       </section>
-                      <ul><h3>Education</h3></ul>
+                    
                       <div className="education__stack">
                       </div>
                     </div>
