@@ -25,7 +25,7 @@ import { ProspectForm } from "./components/prospect/ProspectForm";
 import { EducationForm } from "./components/education/EducationForm";
 import { ExperienceForm } from "./components/experience/ExperienceForm";
 import { EducationVitaProvider } from "./components/education/EducationVitaProvider";
-
+import { ProspectCreate } from "./components/prospect/ProspectCreate";
 export const ApplicationViews = () => {
   return (
     
@@ -54,7 +54,10 @@ export const ApplicationViews = () => {
               <Route element={<VitaForm/>} path="/vitas/new"/>
           </Routes>
           <Routes>
-              <Route element={<ProspectForm/>} path="/prospects/new"/>
+              <Route element={<ProspectForm/>} path="/prospects/edit/:prospectId(d+)"/>
+          </Routes>
+          <Routes>
+              <Route element={<ProspectCreate/>} path="/prospects/new"/>
           </Routes>
             <Routes>
                 <Route element={<ProspectList/>} path="/prospects"/>
