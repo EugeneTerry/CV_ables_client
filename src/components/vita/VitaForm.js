@@ -1,29 +1,29 @@
 import React, {useContext, useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { VitaContext } from "./VitaProvider";
-// import { JobTypeContext } from "../jobtype/JobtypeProvider";
+import { JobTypeContext } from "../jobtype/JobtypeProvider";
 import { MissionContext } from "../mission/MissionProvider";
-// import { ProspectContext } from "../prospect/ProspectProvider";
+import { ProspectContext } from "../prospect/ProspectProvider";
 
 export const VitaForm = () => {
     const history = useNavigate();
-    // const { jobtypes, getJobTypes } = useContext(JobTypeContext);
+    const { addVita } = useContext(VitaContext);
+    const { jobtypes, getJobTypes } = useContext(JobTypeContext);
     const { missions, getMissions } = useContext(MissionContext);
-    // const { prospects, getProspects } = useContext(ProspectContext);
-    const { createVita } = useContext(VitaContext);
-
+    const { prospects, getProspects } = useContext(ProspectContext);
     const [currentVita, setCurrentVita] = useState({
         applicant_id: parseInt(localStorage.getItem("lu_token")),
-        job_type_id: 0,
-        mission_id: 0,
-        prospect_id: 0,
+        job_type_id: "",
+        mission_id: "",
+        prospect_id: "",
+        published: false,
         slug: ""
     });
 
-    useEffect(()=>{
-        // getJobTypes();
+    useEffect(() => {
+        getJobTypes();
         getMissions();
-        // getProspects();
+        getProspects();
     },[]);
 
     const changeVitatState = (e) => {
@@ -50,31 +50,31 @@ export const VitaForm = () => {
           />
         </div>
       </fieldset>
-      {/* <fieldset>
-        <div className="form-group">
-          <label htmlFor="job_type_id">Select Job Type:</label>
-            <select
-            job_type_id="job_type_id"
-            name="job_type_id"
-            id="job_type_id"
-            className="form-control"
-            value={currentVita.job_type_id}
-            onChange= {changeVitatState}
-            >
-              <option value="0"> Job Type </option>
-              {
-                jobtypes.map((jobtype) => (
-                  
-                  <option key={jobtype.id} value={jobtype.id}>
-                    {jobtype.label}
+      <fieldset>
+                <div className="form-group">
+                    <label htmlFor="jobtype_id">Select Job Type:</label>
+                    <select
+                        name="jobtype_id"
+                        id="jobtype_id"
+                        className="form-control"
+                        value={currentVita.jobtype_id}
+                        onChange= {changeVitatState}
+                        >
+                    <option value="0"> Job Type </option>
+
+                    {
+                     jobtypes.map((jobtype) => (
                     
-                  </option>)
-                )
-              }
-            </select>          
-        </div>
-      </fieldset> */}
-      {/* <fieldset>
+                    <option key={jobtype.id} value={jobtype.id}>
+                        {jobtype.label}
+                        
+                    </option>)
+                    )
+                }
+                </select>          
+            </div>
+            </fieldset>
+      <fieldset>
         <div className="form-group">
           <label htmlFor="mission_id">Select Mission Statement:</label>
             <select
@@ -97,8 +97,8 @@ export const VitaForm = () => {
               }
             </select>          
         </div>
-      </fieldset> */}
-      {/* <fieldset>
+      </fieldset>
+      <fieldset>
         <div className="form-group">
           <label htmlFor="prospect_id">Select Company:</label>
             <select
@@ -109,7 +109,7 @@ export const VitaForm = () => {
             value={currentVita.prospect_id}
             onChange= {changeVitatState}
             >
-              <option value="0"> Job Type </option>
+              <option value="0"> Company </option>
               {
                 prospects.map((prospect) => (
                   
@@ -121,7 +121,7 @@ export const VitaForm = () => {
               }
             </select>          
         </div>
-      </fieldset> */}
+      </fieldset>
 
       <button 
         type="submit"
@@ -129,13 +129,11 @@ export const VitaForm = () => {
           evt.preventDefault();
 
           const event = {
-            job_type_id: parseInt(currentVita.job_type_id),
-            mission_id: parseInt(currentVita.mission_id),
-            prospect_id: parseInt(currentVita.prospect_id),
-            slug: currentVita.slug,
+              ...currentVita,
+              applicant_id: parseInt(localStorage.getItem("lu_token")),
           };
 
-          createVita(event).then(() => history("/vitas"));
+          addVita(event).then(() => history("/vitas"));
         }}
         className="gen_button"
         >

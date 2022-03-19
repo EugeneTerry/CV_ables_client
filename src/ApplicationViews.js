@@ -24,6 +24,7 @@ import { ProspectList } from "./components/prospect/ProspectList";
 import { ProspectForm } from "./components/prospect/ProspectForm";
 import { EducationForm } from "./components/education/EducationForm";
 import { ExperienceForm } from "./components/experience/ExperienceForm";
+import { EducationVitaProvider } from "./components/education/EducationVitaProvider";
 
 export const ApplicationViews = () => {
   return (
@@ -37,7 +38,11 @@ export const ApplicationViews = () => {
       >
       
       <ApplicantProvider>
+        <EducationVitaProvider>
         <EducationProvider>
+        <JobTypeProvider>
+        <MissionProvider>
+        <ProspectProvider>
         <VitaProvider>
           <Routes>
               <Route element={<ApplicantList/>} path="/profile"/>
@@ -48,15 +53,12 @@ export const ApplicationViews = () => {
           <Routes>
               <Route element={<VitaForm/>} path="/vitas/new"/>
           </Routes>
-          <ProspectProvider>
           <Routes>
               <Route element={<ProspectForm/>} path="/prospects/new"/>
           </Routes>
             <Routes>
                 <Route element={<ProspectList/>} path="/prospects"/>
             </Routes>
-          </ProspectProvider> 
-        <JobTypeProvider>
         <ExperienceProvider>
           <Routes>
                 <Route element={<ExperienceList/>} path="/experiences"/>
@@ -68,18 +70,15 @@ export const ApplicationViews = () => {
           <Routes>
           <Route element={<JobTypeList/>} path="/jobtypes"/>
           </Routes>
-        </JobTypeProvider>
           <Routes>
               <Route element={<EducationList/>} path="/educations"/>
           </Routes>
           <Routes>
               <Route element={<EducationForm/>} path="/educations/new"/>
           </Routes>
-        <MissionProvider>
           <Routes>
                   <Route element={<MissionList/>} path="/missions"/>
           </Routes>
-        </MissionProvider>
         <DescriptionProvider>
           <Routes>
                 <Route element={<DescriptionList/>} path="/descriptions"/>
@@ -96,7 +95,11 @@ export const ApplicationViews = () => {
         </LanguageProvider>
         </DescriptionProvider>
         </VitaProvider>
+        </ProspectProvider> 
+        </MissionProvider>
+        </JobTypeProvider>
         </EducationProvider>
+        </EducationVitaProvider>
       </ApplicantProvider>
     </main>
 

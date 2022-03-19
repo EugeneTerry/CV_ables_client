@@ -18,7 +18,7 @@ export const ExperienceForm = () => {
 
     useEffect(() => {
         getJobTypes()
-    }, [])
+    }, []);
 
 
     const changeExperienceState = (e) => {
@@ -130,7 +130,7 @@ export const ExperienceForm = () => {
             }}
             className="gen_button"
             >
-                Add School
+                Add Experience
             </button>
         </form>
     )

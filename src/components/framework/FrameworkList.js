@@ -11,10 +11,6 @@ export const FrameworkList = (props) => {
     getLanguages();
   }, []);
 
-  // useEffect(() => {
-  //   getLanguages();
-  // }, []);
-
   return (
     <article className="frame__wrapper">
       <h1>Frameworks</h1>
