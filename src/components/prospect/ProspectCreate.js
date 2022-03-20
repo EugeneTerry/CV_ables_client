@@ -2,18 +2,23 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProspectContext } from "./ProspectProvider";
 import { ProspectStatusContext } from "./ProspectStatusProvider";
+import { VitaContext } from "../vita/VitaProvider";
 
 export const ProspectCreate = () => {
     const history = useNavigate();
     const { addProspect, getProspectById, editProspect } = useContext(ProspectContext);
     const { prospectstatuss, getProspectStatus } = useContext(ProspectStatusContext);
+    const { vitas, getVitas } = useContext(VitaContext);
+
     const { prospectId } = useParams()
 
     const [currentProspect, setCurrentProspect] = useState({
         applicant_id: parseInt(localStorage.getItem("lu_token")),
         listing_url: "",
         prospect_name: "",
-        prospectstatus_id: ""
+        prospectstatus_id: "",
+        markedvita: "",
+        notes: ""
 
     });
     const changeProspectState = (e) => {
@@ -24,7 +29,8 @@ export const ProspectCreate = () => {
     };
     useEffect(() => {
         getProspectStatus();
-    })
+        getVitas();
+    }, [])
 
     useEffect(() => {
         if (prospectId) {
@@ -33,7 +39,9 @@ export const ProspectCreate = () => {
                     ...prevState,
                     listing_url: data.listing_url,
                     prospect_name: data.prospect_name,
-                    prospectstatus_id: data.prospectstatus.id
+                    prospectstatus_id: data.prospectstatus.id,
+                    markedvita: data.markedvita,
+                    notes: data.notes
 
                 }))
             })
@@ -76,27 +84,65 @@ export const ProspectCreate = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="prospectstatus_id">Select Prospect Status:</label>
+                    <label htmlFor="markedvita">Vita Attached </label>
+                    <select
+                        name="markedvita"
+                        required
+                        className="form-control"
+                        value={currentProspect.markedvita}
+                        onChange={changeProspectState}
+                    >
+                        <option value="0"> </option>
+
+                        {
+                            vitas.map((vita) => (
+
+                                <option key={vita.id} value={vita.id}>
+                                    {vita.slug}
+
+                                </option>)
+                            )
+                        }
+                    </select>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="notes">Notes</label>
+                    <textarea
+                        type="text"
+                        name="notes"
+                        optional
+                        autoFocus
+                        className="form-control"
+                        value={currentProspect.notes}
+                        onChange={changeProspectState}
+                    />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="prospectstatus_id">Select Job Search Status:</label>
                     <select
                         name="prospectstatus_id"
                         id="prospectstatus_id"
                         className="form-control"
                         value={currentProspect.prospectstatus_id}
-                        onChange= {changeProspectState}
-                        >
-                    <option value="0"> Job Type </option>
+                        onChange={changeProspectState}
+                    >
+                        <option value="0"> </option>
 
-                    {
-                     prospectstatuss.map((prospectstatus) => (
-                    
-                    <option key={prospectstatus.id} value={prospectstatus.id}>
-                        {prospectstatus.label}
-                        
-                    </option>)
-                    )
-                }
-                </select>          
-            </div>
+                        {
+                            prospectstatuss.map((prospectstatus) => (
+
+                                <option key={prospectstatus.id} value={prospectstatus.id}>
+                                    {prospectstatus.label}
+
+                                </option>)
+                            )
+                        }
+                    </select>
+                </div>
             </fieldset>
 
             <button
@@ -105,8 +151,7 @@ export const ProspectCreate = () => {
                     evt.preventDefault();
 
                     const event = {
-                        prospect_name: currentProspect.prospect_name,
-                        listing_url: currentProspect.listing_url,
+                        ...currentProspect
                     };
 
                     if (prospectId) {

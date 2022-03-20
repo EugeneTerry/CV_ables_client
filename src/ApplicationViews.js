@@ -18,6 +18,7 @@ import { MissionProvider } from "./components/mission/MissionProvider";
 import { MissionForm } from "./components/mission/MissionForm";
 import { MissionList } from "./components/mission/MissionList";
 import { VitaList } from "./components/vita/VitaList";
+import { VitaDetails } from "./components/vita/VitaDetails";
 import { VitaForm } from "./components/vita/VitaForm";
 import { VitaProvider } from "./components/vita/VitaProvider";
 import { ProspectProvider } from "./components/prospect/ProspectProvider";
@@ -46,24 +47,24 @@ export const ApplicationViews = () => {
                 <ProspectProvider>
                   <ProspectStatusProvider>
 
-                  <VitaProvider>
-                    <Routes>
-                      <Route element={<ApplicantList />} path="/profile" />
-                      <Route element={<VitaList />} path="/vitas" />
-                      <Route element={<VitaForm />} path="/vitas/new" />
-                      <Route element={<ProspectCreate />} path="/prospects/edit/:prospectId" />
-                      <Route element={<ProspectCreate />} path="/prospects/new" />
-                      <Route element={<ProspectList />} path="/prospects" />
-                    </Routes>
-
+                    <VitaProvider>
                       <ExperienceProvider>
                         <Routes>
+                          <Route element={<ApplicantList />} path="/profile" />
+                          <Route element={<VitaList />} path="/vitas" />
+                          <Route element={<VitaForm />} path="/vitas/new" />
+                          <Route element={<VitaForm />} path="/vitas/edit/:vitaId" />
+                          <Route element={<VitaDetails />} path="/vitas/:vitaId/:slug" />
+                          <Route element={<VitaDetails />} path="/vitas/:vitaId" />
+                          <Route element={<ProspectCreate />} path="/prospects/edit/:prospectId" />
+                          <Route element={<ProspectCreate />} path="/prospects/new" />
+                          <Route element={<ProspectList />} path="/prospects" />
                           <Route element={<ExperienceList />} path="/experiences" />
                           <Route element={<ExperienceForm />} path="/experiences/new" />
                           <Route element={<ExperienceForm />} path="/experiences/edit/:experienceId" />
                         </Routes>
                       </ExperienceProvider>
-                      
+
                       <Routes>
                         <Route element={<JobTypeList />} path="/jobtypes" />
                         <Route element={<EducationList />} path="/educations" />
@@ -75,21 +76,21 @@ export const ApplicationViews = () => {
 
 
                       </Routes>
-                      
+
                       <DescriptionProvider>
                         <LanguageProvider>
                           <FrameworkProvider>
-                          <Routes> 
-                            <Route element={<DescriptionList />} path="/descriptions" />
-                            <Route element={<FrameworkList />} path="/langframes" />
-                            <Route element={<LanguageList />} path="/languages" />
-                          </Routes>
+                            <Routes>
+                              <Route element={<DescriptionList />} path="/descriptions" />
+                              <Route element={<FrameworkList />} path="/langframes" />
+                              <Route element={<LanguageList />} path="/languages" />
+                            </Routes>
                           </FrameworkProvider>
                         </LanguageProvider>
                       </DescriptionProvider>
-                      
-                    
-                  </VitaProvider>
+
+
+                    </VitaProvider>
                   </ProspectStatusProvider>
                 </ProspectProvider>
               </MissionProvider>

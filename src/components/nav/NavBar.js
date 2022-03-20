@@ -36,11 +36,6 @@ export const NavBar = () => {
                 </Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link" to="/langframes">
-                    <h3>Frames/Lang</h3>
-                </Link>
-            </li>
-            <li className="navbar__item">
                 <Link className="navbar__link" to="/missions">
                     <h3>Missions</h3>
                 </Link>
