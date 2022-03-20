@@ -163,7 +163,7 @@ export const ExperienceForm = () => {
             }}
             className="gen_button"
             >
-                {experienceId? 'Edit': 'Create'} Prospect
+                {experienceId? 'Edit': 'Create'} Experience
                 </button>
         </form>
     )

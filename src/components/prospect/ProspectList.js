@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ProspectContext } from "./ProspectProvider";
 
 export const ProspectList = (props) => {
@@ -19,12 +19,22 @@ export const ProspectList = (props) => {
         {prospects.map((prospect) => {
           return (
             <div key={`prospect--${prospect.id}`} className="prospect">
+                <h2>{prospect.prospect_name}</h2>
               <section className="prospect">
                 <div className="prospect">
-                {prospect.prospect_name}
-                <li>{prospect.listing_url}</li>
+                Job Search Status:<li>{prospect.prospectstatus.label}</li>
                 <br></br>
+                Job Listing Link<li>{prospect.listing_url}</li>
+                <br></br>
+                Notes:<ul>{prospect.notes}</ul>
                 </div>
+                <Link
+                to={`/vitas/${prospect.markedvita}`}
+                className="linkTitleVitaList"
+              >
+                Submitted Vita
+              </Link>
+
               </section>
               <button onClick={() => history(`/prospects/edit/${prospect.id}`)}>Edit</button>
               <button onClick={() => deleteProspect(prospect.id)}>Delete</button>

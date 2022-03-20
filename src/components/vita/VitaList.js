@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { VitaContext } from "./VitaProvider";
 import { EducationContext } from "../education/EducationProvider";
 import { EducationVitaContext } from "../education/EducationVitaProvider";
 
 export const VitaList = (props) => {
-  const { vitas, getVitas } = useContext(VitaContext);
+  const { vitas, getVitas, deleteVita } = useContext(VitaContext);
   const { educations, getEducations } = useContext(EducationContext);
-  const{ educationvitas, getEducationVitas} = useContext(EducationVitaContext);
+  const { getEducationVitas } = useContext(EducationVitaContext);
+  const history = useNavigate()
 
 
   useEffect(() => {
@@ -22,14 +24,20 @@ export const VitaList = (props) => {
   return (
     <article className="vita__wrapper">
       <h1>Vitas</h1>
+      <button onClick={() => history(`/vitas/new/`)}>Add Vita</button>
       <div className="vita__stack">
         {vitas.map((vita) => {
           return (
             <div key={`vita--${vita.id}`} className="vita">
+              <Link
+                to={`/vitas/${vita.id}/${vita.slug}`}
+                key={vita.id}
+                className="linkTitleVitaList"
+              >
+                <h2>{vita.mission.job_type.label}</h2>
+              </Link>
               <section className="vita">
                 <div className="vita__text">
-                  <h2>{vita.applicant.user.first_name}{" "}{vita.applicant.user.last_name}</h2>
-                  <ul><h3>{vita.mission.job_type.label}</h3></ul>
                   <ul><h4>About Me:</h4>{" "}{vita.mission.mission_text}</ul>
                   <ul>{vita.applicant.address}</ul>
                   <ul><h4>Contact:</h4>{" "}{vita.applicant.user.email}</ul>
@@ -40,7 +48,7 @@ export const VitaList = (props) => {
                 </div>
               </section>
               <div>
-              {/* <ul><h3>Education</h3></ul>
+                <ul><h3>Education</h3></ul>
               </div>
               <div className="education__stack">
                 {educations.map((education) => {
@@ -55,34 +63,13 @@ export const VitaList = (props) => {
                           <br></br>
                         </div>
                       </section>
-                      <div className="educationvita__stack">
-                      </div>
-                    </div>
-                  );
-                })} */}
-                <ul>Job Listing:{" "}{vita.prospect.listing_url}</ul>
-              </div>
-              <div className="educationvita__stack">
-                {educationvitas.map((educationvita) => {
-                  return (
-                    <div key={`educationvita--${educationvita.id}`} className="educationvita">
-                      <section className="educationvita">
-                        <div className="educationvita__text">
-                          <ul><b>{educationvita.education.school_name}</b></ul>
-                          <ul>{educationvita.education.city}{" "}{educationvita.education.state}.</ul>
-                          <ul>Degree:{" "}{educationvita.education.diploma}</ul>
-                          <ul>Year Graduated:{" "}{educationvita.education.grad_year}</ul>
-                          <br></br>
-                        </div>
-                      </section>
-                    
-                      <div className="education__stack">
-                      </div>
                     </div>
                   );
                 })}
-                
+                <ul>Job Listing:{" "}{vita.prospect.listing_url}</ul>
               </div>
+                <button onClick={() => history(`/experiences/edit/${vita.id}`)}>Edit</button>
+                <button onClick={() => deleteVita(vita.id)}>Delete</button>
             </div>
           );
         })}
