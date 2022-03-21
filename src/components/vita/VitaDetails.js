@@ -31,61 +31,52 @@ export const VitaDetails = (props) => {
                 <div key={`vita--${vita?.id}`} className="vita">
                     {
                         Object.values(vita).length && (
-                            <section className="vita">
-                                <div className="vita__text">
-                                    <h1>{vita.applicant.user.first_name}{" "}{vita.applicant.user.last_name}</h1>
-                                    <ul><h3>{vita.mission.job_type.label}</h3></ul>
-                                    <ul><h4>About Me:</h4>{" "}{vita.mission.mission_text}</ul>
-                                    <ul>{vita.applicant.address}</ul>
-                                    <ul><h4>Contact:</h4>{" "}{vita.applicant.user.email}</ul>
-                                    <ul>{vita.applicant.address}</ul>
-                                    <ul>{vita.applicant.city}{" "}{vita.applicant.state}.{" "}{vita?.applicant.zipcode}</ul>
-                                    <ul>{vita.applicant.phone}</ul>
-                                    <br></br>
-                                </div>
-                            </section>
+                            <>
+                                <section className="vita-header">
+                                    <h1 className="vita-applicant-name">{vita.applicant.user.first_name}{" "}{vita.applicant.user.last_name}</h1>
+                                    <h3 className="vita-job-title">{vita.mission.job_type.label}</h3>
+
+                                    <p className="contact-info">{vita.applicant.address}, {vita.applicant.city}{" "}{vita.applicant.state}.{" "}{vita?.applicant.zipcode}</p>
+                                    <p className="contact-info"><a href={`tel:${vita.applicant.phone}`}>{vita.applicant.phone}</a> | <a href={`mailto:${vita.applicant.user.email}`}>{vita.applicant.user.email}</a></p>
+
+                                </section>
+                                <section className="vita-mission">
+                                    <p>{vita.mission.mission_text}</p>
+                                </section>
+                            </>
 
                         )
                     }
-                    <article className="experience__wrapper">
-                        <h1>Experiences</h1>
-                        <div className="experience__stack">
-                            {experiences.map((experience) => {
-                                return (
-                                    <div key={`experience--${experience.id}`} className="experience">
-                                        <section className="experience">
-                                            <div className="experience__text">
-                                                {experience.company}
-                                                <ul>Title:{" "}{experience.job_title}</ul>
-                                                <ul>Job Type:{" "}{experience.job_type.label}</ul>
-                                                <ul>From:{" "}{experience.start_yr} to {experience.end_yr}</ul>
-                                                <ul>Duties:{" "}{experience.duties}</ul>
-                                                <br></br>
-                                            </div>
-                                        </section>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </article>
 
-                    <div>
-                        <ul><h3>Education</h3></ul>
+                    <div className="vita-section">
+                    <hr/>
+                        <h3 className="vita-section-header">Experiences</h3> 
+                        <hr/>
+                        {experiences.map((experience) => {
+                            return (
+                                <div key={`experience--${experience.id}`} className="experience">
+
+                                    <div className="experience__text">
+                                        <h4 className="vita-section-title">{experience.company}</h4>
+                                        <p className="vita-subtitle">{experience.job_title}{" "} | {experience.start_yr} - {experience.end_yr}</p>
+                                        <p className="vita-text">{experience.duties}</p>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
-                    <div className="education__stack">
+                    <div className="vita-section">
+                    <hr/>
+                        <h3 className="vita-section-header">Education</h3>
+                        <hr/>
                         {educations.map((education) => {
                             return (
                                 <div key={`education--${education.id}`} className="education">
-                                    <section className="education">
-                                        <div className="description__text">
-                                            <ul><b>{education.school_name}</b></ul>
-                                            <ul>{education.city}{" "}{education.state}.</ul>
-                                            <ul>Degree:{" "}{education.diploma}</ul>
-                                            <ul>Year Graduated:{" "}{education.grad_year}</ul>
-                                            <br></br>
-                                        </div>
-                                    </section>
-                                    <div className="educationvita__stack">
+                                    <div className="description__text">
+                                    <h4 className="vita-section-title">{education.school_name}</h4>
+                                    <p className="vita-subtitle">{education.city}{" "}{education.state}.</p>
+                                        <p className="vita-text">{education.diploma}</p>
+                                       
                                     </div>
                                 </div>
                             );
