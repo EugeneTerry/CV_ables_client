@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ProspectContext } from "./ProspectProvider";
 import { ProspectStatusContext } from "./ProspectStatusProvider";
 import { VitaContext } from "../vita/VitaProvider";
+import {Button} from "react-bootstrap";
 
 export const ProspectCreate = () => {
     const history = useNavigate();
@@ -51,9 +52,9 @@ export const ProspectCreate = () => {
     }, [prospectId])
 
     return (
-        <form>
-            <h2 className="prospectForm__name">
-                {prospectId ? 'Edit' : 'Create'} Prospect</h2>
+        <form className="container">
+            <h1 className="prospectForm__name">
+                {prospectId ? 'Edit' : 'Create'} Prospect</h1>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="name">Company: </label>
@@ -72,7 +73,7 @@ export const ProspectCreate = () => {
                 <div className="form-group">
                     <label htmlFor="listing_url">Listing URL: </label>
                     <input
-                        type="text"
+                        type="url"
                         name="listing_url"
                         required
                         autoFocus
@@ -84,15 +85,15 @@ export const ProspectCreate = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="markedvita">Vita Attached </label>
+                    <label htmlFor="markedvita">Vita Submitted </label>
                     <select
                         name="markedvita"
                         required
-                        className="form-control"
+                        className="form-select"
                         value={currentProspect.markedvita}
                         onChange={changeProspectState}
                     >
-                        <option value="0"> </option>
+                        <option value="0">None Selected</option>
 
                         {
                             vitas.map((vita) => (
@@ -126,7 +127,7 @@ export const ProspectCreate = () => {
                     <select
                         name="prospectstatus_id"
                         id="prospectstatus_id"
-                        className="form-control"
+                        className="form-select"
                         value={currentProspect.prospectstatus_id}
                         onChange={changeProspectState}
                     >
@@ -145,8 +146,9 @@ export const ProspectCreate = () => {
                 </div>
             </fieldset>
 
-            <button
+            <Button
                 type="submit"
+                variant="success"
                 onClick={(evt) => {
                     evt.preventDefault();
 
@@ -164,7 +166,7 @@ export const ProspectCreate = () => {
                 className="gen_button"
             >
                 {prospectId ? 'Edit' : 'Create'} Prospect
-            </button>
+            </Button>
         </form>
     )
 

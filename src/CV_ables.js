@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes, Navigate} from "react-router-dom";
 import { ApplicationViews } from "./ApplicationViews";
-import { NavBar } from "./components/nav/NavBar";
+import { NavBar2 } from "./components/nav/NavBar";
 import { Login } from "./components/auth/Login"; 
 import { Register } from "./components/auth/Register"; 
 // import { Wrapper } from "./Styles/Global";
@@ -12,7 +12,7 @@ const Home = () => {
   if (localStorage.getItem("lu_token")) {
     return (
       <>
-          <NavBar />
+          <NavBar2 />
           <ApplicationViews />
       </>
     );

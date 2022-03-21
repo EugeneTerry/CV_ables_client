@@ -2,6 +2,8 @@ import React, {useContext, useState, useEffect} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { MissionContext } from "./MissionProvider";
 import { JobTypeContext } from "../jobtype/JobtypeProvider";
+import {Button} from "react-bootstrap";
+
 export const MissionForm = () => {
     const history = useNavigate();
     const { addMission, getMissionById, editMission } = useContext(MissionContext);
@@ -38,9 +40,9 @@ export const MissionForm = () => {
     },[missionId]) 
 
       return (
-        <form>
-             <h2 className="missionForm__name">
-             {missionId? 'Edit': 'Create'} Mission</h2>
+        <form className="container">
+             <h1 className="missionForm__name">
+             {missionId? 'Edit': 'Create'} Mission</h1>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="mission_text">Your Statement: </label>
@@ -62,7 +64,7 @@ export const MissionForm = () => {
                     <select
                         name="jobtype_id"
                         id="jobtype_id"
-                        className="form-control"
+                        className="form-select"
                         value={currentMission.jobtype_id}
                         onChange= {changeMissionState}
                         >
@@ -81,8 +83,9 @@ export const MissionForm = () => {
             </div>
             </fieldset>
             
-            <button 
+            <Button 
             type="submit"
+            variant="success"
             onClick={(evt) => {
                 evt.preventDefault();
 
@@ -99,7 +102,7 @@ export const MissionForm = () => {
             className="gen_button"
             >
                 {missionId? 'Edit': 'Create'} Personal Mission
-                </button>
+                </Button>
         </form>
     )
 

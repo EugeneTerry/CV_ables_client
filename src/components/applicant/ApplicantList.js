@@ -28,7 +28,7 @@ export const ApplicantList = (props) => {
           </>
           )
         }
-        <button>edit</button>
+        {/* <button>edit</button> */}
       </div>
     </article>
 

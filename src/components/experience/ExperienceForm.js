@@ -2,6 +2,9 @@ import React, {useContext, useEffect, useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ExperienceContext } from "./ExperienceProvider";
 import { JobTypeContext } from "../jobtype/JobtypeProvider";
+import {Button} from "react-bootstrap";
+
+
 
 
 export const ExperienceForm = () => {
@@ -48,9 +51,9 @@ export const ExperienceForm = () => {
     },[experienceId]) 
 
       return (
-        <form>
-             <h2 className="experienceForm__name">
-             {experienceId? 'Edit': 'Create'} Experience</h2>
+        <form className="container">
+             <h1 className="experienceForm__name">
+             {experienceId? 'Edit': 'Create'} Experience</h1>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="company">Company: </label>
@@ -85,7 +88,7 @@ export const ExperienceForm = () => {
                     <select
                         name="jobtype_id"
                         id="jobtype_id"
-                        className="form-control"
+                        className="form-select"
                         value={currentExperience.jobtype_id}
                         onChange= {changeExperienceState}
                         >
@@ -146,8 +149,9 @@ export const ExperienceForm = () => {
                     />
                 </div>
             </fieldset>
-            <button 
+            <Button 
             type="submit"
+            variant="success"
             onClick={(evt) => {
                 evt.preventDefault();
 
@@ -164,7 +168,7 @@ export const ExperienceForm = () => {
             className="gen_button"
             >
                 {experienceId? 'Edit': 'Create'} Experience
-                </button>
+                </Button>
         </form>
     )
 
