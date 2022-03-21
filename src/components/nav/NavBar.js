@@ -1,63 +1,52 @@
 import React from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "./NavBar.css"
+import { Navbar, Container, Nav, Button } from "react-bootstrap"
 
-export const NavBar = () => {
+export const NavBar2 = () => {
     const history = useNavigate()
     return (
-        
-        <ul className="navbar">
-            <li className="navbar__item">
-                <Link className="navbar__link" to="/profile">
-                    <h3>Profile</h3>
-                </Link>  
-            </li>
-            <li className="navbar__item">
-                <Link className="navbar__link" to="/educations">
-                    <h3>Education</h3>
-                </Link>
-            </li>
-            <li className="navbar__item">
-                
-                <Link className="navbar__link" to="/experiences">
-                    <h3>Experience</h3>
-                </Link>
-            </li>
-            <li className="navbar__item">
-                
-                <Link className="navbar__link" to="/vitas">
-                    <h3>Vitas</h3>
-                </Link>
-            </li>
-            <li className="navbar__item">
-                
-                <Link className="navbar__link" to="/prospects">
-                    <h3>Prospects</h3>
-                </Link>
-            </li>
-            <li className="navbar__item">
-                <Link className="navbar__link" to="/missions">
-                    <h3>Missions</h3>
-                </Link>
-            </li>
-            {
-                (localStorage.getItem("lu_token") !== null) ?
-                    <li className="nav-item">
-                        <button className="nav-linkLink"
-                            onClick={() => {
-                                localStorage.removeItem("lu_token")
-                                history({ pathname: "login" })
-                            }}
-                        ><h3>Logout</h3></button>
-                    </li>:
-                    <>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/register">Register</Link>
-                        </li>
-                    </>
-            }        </ul>
+        <Navbar bg="dark" variant="dark" expand="lg">
+            <Container>
+                <Navbar.Brand href="/">CV-ables</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <Link className="nav-link" to="/prospects">
+                            Prospects
+                        </Link>
+                        {/* <Link className="nav-link" to="/profile">
+                            Profile
+                        </Link> */}
+                        <Link className="nav-link" to="/educations">
+                            Education
+                        </Link>
+
+                        <Link className="nav-link" to="/experiences">
+                            Experience
+                        </Link>
+                        <Link className="nav-link" to="/missions">
+                            Missions
+                        </Link>
+                        <Link className="nav-link" to="/vitas">
+                            Vitas
+                        </Link>
+                        {
+                            (localStorage.getItem("lu_token") !== null) ?
+                                <Button variant="secondary"
+                                    onClick={() => {
+                                        localStorage.removeItem("lu_token")
+                                        history({ pathname: "login" })
+                                    }}>Logout</Button> :
+                                <>
+                                    <Link className="nav-link" to="/login">Login</Link>
+                                    <Link className="nav-link" to="/register">Register</Link>
+                                </>
+                        }
+                    </Nav>
+                    </Navbar.Collapse>
+            </Container>
+        </Navbar>
+
     )
 }

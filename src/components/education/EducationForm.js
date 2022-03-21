@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EducationContext } from "./EducationProvider";
+import {Button} from "react-bootstrap";
 
 export const EducationForm = () => {
     const history = useNavigate();
@@ -37,10 +38,10 @@ export const EducationForm = () => {
         }
     }, [educationId])
     return (
-        <form>
-            <h2 className="educationForm__name">
+        <form className="container">
+            <h1 className="educationForm__name">
                 {educationId ? 'Edit' : 'Create'} School
-            </h2>
+            </h1>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="name">School Name: </label>
@@ -111,8 +112,9 @@ export const EducationForm = () => {
                     />
                 </div>
             </fieldset>
-            <button
+            <Button
                 type="submit"
+                variant="success"
                 onClick={(evt) => {
                     evt.preventDefault();
 
@@ -129,7 +131,7 @@ export const EducationForm = () => {
                 className="gen_button"
             >
                 {educationId ? 'Edit' : 'Create'} School
-            </button>
+            </Button>
         </form>
     )
 

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { EducationContext } from "./EducationProvider";
+import {Button, Card} from 'react-bootstrap';
 
 export const EducationList = (props) => {
   const{ educations, getEducations, deleteEducation} = useContext(EducationContext);
@@ -12,26 +13,30 @@ export const EducationList = (props) => {
   }, []);
 
   return (
-    <article className="education__wrapper">
+    <article className="container">
         <h1>Education</h1>
-        <button onClick={() => history(`/educations/new/`)}>Add Education</button>
+        <Button variant="success" onClick={() => history(`/educations/new/`)}>Add Education</Button>
         <div className="education__stack">
         {educations.map((education) => {
           return (
-            <div key={`education--${education.id}`} className="education">
-              <section className="education">
-                <div className="description__text">
-                {education.school_name}
-                <ul>{education.city}{" "}{education.state}.</ul> 
-                <ul>Degree:{" "}{education.diploma}</ul>
-                <ul>Year Graduated:{" "}{education.grad_year}</ul>
 
-              <button onClick={() => history(`/educations/edit/${education.id}`)}>Edit</button>
-              <button onClick={() => deleteEducation(education.id)}>Delete</button>
-            
-                </div>
-              </section>
-            </div>
+
+            <Card key={`education--${education.id}`}>
+            <Card.Header>{education.school_name}</Card.Header>
+            <Card.Body>
+              <Card.Text>
+              {education.city}{" "}{education.state}
+              </Card.Text>
+              <Card.Text>
+              Degree:{" "}{education.diploma}
+              </Card.Text>
+              <Card.Text>
+              Year Graduated:{" "}{education.grad_year}
+              </Card.Text>
+              <Button onClick={() => history(`/educations/edit/${education.id}`)}>Edit</Button>{"  "}
+              <Button variant="danger" onClick={() => deleteEducation(education.id)}>Delete</Button>
+            </Card.Body>
+          </Card>
           );
         })}
         </div> 

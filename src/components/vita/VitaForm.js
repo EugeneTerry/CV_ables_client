@@ -4,10 +4,12 @@ import { VitaContext } from "./VitaProvider";
 import { JobTypeContext } from "../jobtype/JobtypeProvider";
 import { MissionContext } from "../mission/MissionProvider";
 import { ProspectContext } from "../prospect/ProspectProvider";
+import { Button } from "react-bootstrap";
+
 
 export const VitaForm = () => {
   const history = useNavigate();
-  const { addVita, getVitaById, editVita} = useContext(VitaContext);
+  const { addVita, getVitaById, editVita } = useContext(VitaContext);
   const { jobtypes, getJobTypes } = useContext(JobTypeContext);
   const { missions, getMissions } = useContext(MissionContext);
   const { prospects, getProspects } = useContext(ProspectContext);
@@ -56,8 +58,8 @@ export const VitaForm = () => {
 
 
   return (
-    <form>
-      <h2 className="vitaForm__nickname">Create New Vita</h2>
+    <form className="container">
+      <h1 className="vitaForm__nickname">{vitaId ? 'Edit' : 'Create'} Vita</h1>
       <fieldset>
         <div className="form-group">
           <label htmlFor="nickname">Vita Nickname: </label>
@@ -78,7 +80,7 @@ export const VitaForm = () => {
           <select
             name="jobtype_id"
             id="jobtype_id"
-            className="form-control"
+            className="form-select"
             value={currentVita.jobtype_id}
             onChange={changeVitatState}
           >
@@ -103,7 +105,7 @@ export const VitaForm = () => {
             mission_id="mission_id"
             name="mission_id"
             id="mission_id"
-            className="form-control"
+            className="form-select"
             value={currentVita.mission_id}
             onChange={changeVitatState}
           >
@@ -127,7 +129,7 @@ export const VitaForm = () => {
             prospect_id="prospect_id"
             name="prospect_id"
             id="prospect_id"
-            className="form-control"
+            className="form-select"
             value={currentVita.prospect_id}
             onChange={changeVitatState}
           >
@@ -144,27 +146,9 @@ export const VitaForm = () => {
           </select>
         </div>
       </fieldset>
-      <button 
-            type="submit"
-            onClick={(evt) => {
-                evt.preventDefault();
-
-                const event = {
-                     ...currentVita, 
-                    applicant_id: parseInt(localStorage.getItem("lu_token")),
-                };
-                if (vitaId){
-                    editVita({...event, id: vitaId}).then(() => history("/vitas"));
-                }else{
-                    addVita(event).then(() => history("/vitas"));
-                }
-            }}
-            className="gen_button"
-            >
-                {vitaId? 'Edit': 'Create'} Vita
-                </button>
-      {/* <button
+      <Button
         type="submit"
+        variant="success"
         onClick={(evt) => {
           evt.preventDefault();
 
@@ -172,13 +156,17 @@ export const VitaForm = () => {
             ...currentVita,
             applicant_id: parseInt(localStorage.getItem("lu_token")),
           };
-
-          addVita(event).then(() => history("/vitas"));
+          if (vitaId) {
+            editVita({ ...event, id: vitaId }).then(() => history("/vitas"));
+          } else {
+            addVita(event).then(() => history("/vitas"));
+          }
         }}
         className="gen_button"
       >
-        Create Vita
-      </button> */}
+        {vitaId ? 'Edit' : 'Create'} Vita
+      </Button>
+
     </form>
   )
 

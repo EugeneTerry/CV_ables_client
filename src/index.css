@@ -1,13 +1,49 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+*,html {font-family: 'Montserrat', sans-serif;}
+
+h1 {
+  font-size: 2em;
+  margin-top: 50px;
+}
+h3 {
+  font-size: 1.2em;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.card {
+  margin: 10px 0;
+}
+
+.btn-sm {
+  min-width: 100px;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+table {
+  margin-top: 20px;
+}
+
+.table-notes {
+  font-size: 13px;
+}
+
+.table-status, .linkTitleVitaList {
+  font-size: 15px;
+}
+.vita-list:first-of-type {
+  margin-top: 30px;
+}
+
+.vita-list > .card-body{
+  display: flex;
+  justify-content: space-between;
+}
+
+fieldset {
+  margin: 10px 0;
+}
+
+label {
+  font-weight: bold;
+  font-size: 14px;
 }

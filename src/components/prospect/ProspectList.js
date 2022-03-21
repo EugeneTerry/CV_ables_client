@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ProspectContext } from "./ProspectProvider";
+import { Button, Table } from 'react-bootstrap';
 
 export const ProspectList = (props) => {
-  const{ prospects, getProspects, deleteProspect} = useContext(ProspectContext);
+  const { prospects, getProspects, deleteProspect } = useContext(ProspectContext);
   const history = useNavigate()
 
 
@@ -12,36 +13,53 @@ export const ProspectList = (props) => {
   }, []);
 
   return (
-    <article className="prospect__wrapper">
-        <h1>Prospects</h1>
-        <button onClick={() => history(`/prospects/new/`)}>Add Prospect</button>
-        <div className="prospect__stack">
-        {prospects.map((prospect) => {
-          return (
-            <div key={`prospect--${prospect.id}`} className="prospect">
-                <h2>{prospect.prospect_name}</h2>
-              <section className="prospect">
-                <div className="prospect">
-                Job Search Status:<li>{prospect.prospectstatus.label}</li>
-                <br></br>
-                Job Listing Link<li>{prospect.listing_url}</li>
-                <br></br>
-                Notes:<ul>{prospect.notes}</ul>
-                </div>
-                <Link
-                to={`/vitas/${prospect.markedvita}`}
-                className="linkTitleVitaList"
-              >
-                Submitted Vita
-              </Link>
+    <article className="container">
+      <h1>Prospects</h1>
+      <Button variant="success" onClick={() => history(`/prospects/new/`)}>Add Prospect</Button>
 
-              </section>
-              <button onClick={() => history(`/prospects/edit/${prospect.id}`)}>Edit</button>
-              <button onClick={() => deleteProspect(prospect.id)}>Delete</button>
-            </div>
-          );
-        })}
-        </div> 
+      <div className="prospect__stack">
+
+
+        <Table responsive>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Posting</th>
+              <th>Notes</th>
+              <th>Vita</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {prospects.map((prospect) => (
+              <tr>
+
+                <th>{prospect.prospect_name}</th>
+                <td className="table-status">{prospect.prospectstatus.label}</td>
+                <td><a href={prospect.listing_url} target="_blank">📄</a></td>
+                <td className="table-notes">{prospect.notes}</td>
+                <td><Link
+                  to={`/vitas/${prospect.markedvita}`}
+                  className="linkTitleVitaList"
+                >
+                  Link
+                </Link>
+                </td>
+                <td>
+                  <Button size="sm" onClick={() => history(`/prospects/edit/${prospect.id}`)}>Edit</Button>
+                  <br/>
+                  <Button variant="danger" size="sm" onClick={() => deleteProspect(prospect.id)}>Delete</Button>
+
+                </td>
+              </tr>
+            ))}
+
+
+          </tbody>
+        </Table>
+
+      </div>
     </article>
   );
 };

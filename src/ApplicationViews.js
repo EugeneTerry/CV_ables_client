@@ -32,11 +32,7 @@ export const ApplicationViews = () => {
   return (
 
     <main
-      style={{
-        margin: "5rem 2rem",
-        backgroundColor: "#dcf2e2",
-        lineHeight: "1.75rem",
-      }}
+
     >
 
       <ApplicantProvider>
@@ -59,6 +55,7 @@ export const ApplicationViews = () => {
                           <Route element={<ProspectCreate />} path="/prospects/edit/:prospectId" />
                           <Route element={<ProspectCreate />} path="/prospects/new" />
                           <Route element={<ProspectList />} path="/prospects" />
+                          <Route element={<ProspectList />} path="/" />
                           <Route element={<ExperienceList />} path="/experiences" />
                           <Route element={<ExperienceForm />} path="/experiences/new" />
                           <Route element={<ExperienceForm />} path="/experiences/edit/:experienceId" />

@@ -26,14 +26,14 @@ export const VitaDetails = (props) => {
     }
 
     return (
-        <article className="vita__wrapper">
+        <article className="container">
             <div className="vitadetail__stack">
                 <div key={`vita--${vita?.id}`} className="vita">
                     {
                         Object.values(vita).length && (
                             <section className="vita">
                                 <div className="vita__text">
-                                    <h2>{vita.applicant.user.first_name}{" "}{vita.applicant.user.last_name}</h2>
+                                    <h1>{vita.applicant.user.first_name}{" "}{vita.applicant.user.last_name}</h1>
                                     <ul><h3>{vita.mission.job_type.label}</h3></ul>
                                     <ul><h4>About Me:</h4>{" "}{vita.mission.mission_text}</ul>
                                     <ul>{vita.applicant.address}</ul>

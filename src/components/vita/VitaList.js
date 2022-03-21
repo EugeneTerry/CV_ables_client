@@ -1,8 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { VitaContext } from "./VitaProvider";
 import { EducationContext } from "../education/EducationProvider";
 import { EducationVitaContext } from "../education/EducationVitaProvider";
+import {Button, Card} from 'react-bootstrap';
+
 
 export const VitaList = (props) => {
   const { vitas, getVitas, deleteVita } = useContext(VitaContext);
@@ -22,58 +24,33 @@ export const VitaList = (props) => {
   // })
 
   return (
-    <article className="vita__wrapper">
+    <article className="container">
       <h1>Vitas</h1>
-      <button onClick={() => history(`/vitas/new/`)}>Add Vita</button>
-      <div className="vita__stack">
+      <Button variant="success" onClick={() => history(`/vitas/new/`)}>Add Vita</Button>
+
+      
         {vitas.map((vita) => {
           return (
-            <div key={`vita--${vita.id}`} className="vita">
+           
+              <Card key={`vita--${vita.id}`} className="vita-list" body>
               <Link
                 to={`/vitas/${vita.id}/${vita.slug}`}
                 key={vita.id}
                 className="linkTitleVitaList"
               >
-                <h2>{vita.mission.job_type.label}</h2>
+                <h3>{vita.job_type.label}</h3>
               </Link>
-              <section className="vita">
-                <div className="vita__text">
-                  <ul><h4>About Me:</h4>{" "}{vita.mission.mission_text}</ul>
-                  <ul>{vita.applicant.address}</ul>
-                  <ul><h4>Contact:</h4>{" "}{vita.applicant.user.email}</ul>
-                  <ul>{vita.applicant.address}</ul>
-                  <ul>{vita.applicant.city}{" "}{vita.applicant.state}.{" "}{vita.applicant.zipcode}</ul>
-                  <ul>{vita.applicant.phone}</ul>
-                  <br></br>
+
+                <div>
+                <Button size="sm" onClick={() => history(`/vitas/edit/${vita.id}`)}>Edit</Button>
+                {' '}
+                <Button variant="danger" size="sm" onClick={() => deleteVita(vita.id)}>Delete</Button>
                 </div>
-              </section>
-              <div>
-                <ul><h3>Education</h3></ul>
-              </div>
-              <div className="education__stack">
-                {educations.map((education) => {
-                  return (
-                    <div key={`education--${education.id}`} className="education">
-                      <section className="education">
-                        <div className="description__text">
-                          <ul><b>{education.school_name}</b></ul>
-                          <ul>{education.city}{" "}{education.state}.</ul>
-                          <ul>Degree:{" "}{education.diploma}</ul>
-                          <ul>Year Graduated:{" "}{education.grad_year}</ul>
-                          <br></br>
-                        </div>
-                      </section>
-                    </div>
-                  );
-                })}
-                <ul>Job Listing:{" "}{vita.prospect.listing_url}</ul>
-              </div>
-                <button onClick={() => history(`/experiences/edit/${vita.id}`)}>Edit</button>
-                <button onClick={() => deleteVita(vita.id)}>Delete</button>
-            </div>
+                </Card>
+            
           );
         })}
-      </div>
+      
     </article>
   );
 };
