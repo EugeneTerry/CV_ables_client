@@ -47,3 +47,54 @@ label {
   font-weight: bold;
   font-size: 14px;
 }
+
+
+/* VITA STYLES */
+
+.vita-header {
+text-align: center;
+margin-bottom: 20px;
+}
+
+.vita-applicant-name {
+font-size: 1.5em;
+}
+
+.vita-job-title {
+  font-size: 1em;
+  margin-bottom: 0;
+}
+
+.contact-info {
+margin: 0;
+padding: 0;
+font-size: .8em;
+}
+
+.vita-mission {
+font-size: .8em;
+}
+
+.vita-section {
+
+}
+.vita-section-header {
+margin: 20px 0;
+
+}
+
+.vita-section-title {
+font-size: 1em;
+margin: 0;
+}
+.vita-subtitle {
+font-size: .7em;
+font-weight: bold;
+margin: 0;
+}
+
+.vita-text{
+margin: 2px 0 10px;
+font-size: .8em;
+/* font-family: Arial, Helvetica, sans-serif; */
+}
