@@ -34,7 +34,7 @@ export const ExperienceList = (props) => {
                   From:{" "}{experience.start_yr} to {experience.end_yr}
                 </Card.Text>
                 <Card.Text>
-                  Duties:{" "}{experience.duties}
+                  {experience.duties}
                 </Card.Text>
                 <Button onClick={() => history(`/experiences/edit/${experience.id}`)}>Edit</Button>{"  "}
                 <Button variant="danger" onClick={() => deleteExperience(experience.id)}>Delete</Button>
