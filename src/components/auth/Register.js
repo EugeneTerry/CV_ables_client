@@ -26,7 +26,7 @@ export const Register = () => {
                 "email": email.current.value
             }
 
-            return fetch("http://127.0.0.1:8000/register", {
+            return fetch(`${process.env.REACT_APP_DATABASE_URL}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { VitaContext } from "./VitaProvider";
@@ -8,7 +9,7 @@ import {Button, Card} from 'react-bootstrap';
 
 export const VitaList = (props) => {
   const { vitas, getVitas, deleteVita } = useContext(VitaContext);
-  const { educations, getEducations } = useContext(EducationContext);
+  const { getEducations } = useContext(EducationContext);
   const { getEducationVitas } = useContext(EducationVitaContext);
   const history = useNavigate()
 

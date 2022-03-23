@@ -6,7 +6,7 @@ export const ProspectStatusProvider = (props) => {
   const [prospectstatuss, setProspectStatus] = useState([]);
 
   const getProspectStatus = () => {
-    return fetch("http://localhost:8000/prospectstatuss", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/prospectstatuss`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },

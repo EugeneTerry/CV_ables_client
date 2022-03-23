@@ -6,7 +6,7 @@ export const ExperienceProvider = (props) => {
   const [experiences, setExperience] = useState([]);
 
   const getExperiences = () => {
-    return fetch("http://localhost:8000/experiences", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/experiences`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },
@@ -16,7 +16,7 @@ export const ExperienceProvider = (props) => {
   };
 
   const addExperience = newExperience => {
-    return fetch("http://localhost:8000/experiences", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/experiences`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const ExperienceProvider = (props) => {
     };
 
   const getExperienceById = (id) => {
-    return fetch(`http://localhost:8000/experiences/${id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/experiences/${id}`, {
         headers: {
             Authorization: `Token ${localStorage.getItem("lu_token")}`
         }
@@ -37,7 +37,7 @@ export const ExperienceProvider = (props) => {
   }
 
   const deleteExperience = (experienceID) => {
-    return fetch(`http://localhost:8000/experiences/${experienceID}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/experiences/${experienceID}`, {
       method: "DELETE",
       headers: {
           Authorization: `Token ${localStorage.getItem("lu_token")}`
@@ -47,7 +47,7 @@ export const ExperienceProvider = (props) => {
   }
 
   const editExperience = (experience) => {
-    return fetch(`http://localhost:8000/experiences/${experience.id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/experiences/${experience.id}`, {
       method: 'PUT',
       headers: {
           "Content-Type": "application/json",

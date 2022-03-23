@@ -6,7 +6,7 @@ export const DescriptionProvider = (props) => {
   const [descriptions, setDescription] = useState([]);
 
   const getDescriptions = () => {
-    return fetch("http://localhost:8000/descriptions", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/descriptions`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },
@@ -16,7 +16,7 @@ export const DescriptionProvider = (props) => {
   };
 
   const addDescription = newDescription => {
-    return fetch("http://localhost:8000/descriptions", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/descriptions`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const DescriptionProvider = (props) => {
     };
 
   const getDescriptionById = (id) => {
-    return fetch(`http://localhost:8000/descriptions/${id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/descriptions/${id}`, {
         headers: {
             Authorization: `Token ${localStorage.getItem("lu_token")}`
         }
@@ -37,7 +37,7 @@ export const DescriptionProvider = (props) => {
   }
 
   const deleteDescription = (descriptionID) => {
-    return fetch(`http://localhost:8000/descriptions/${descriptionID}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/descriptions/${descriptionID}`, {
       method: "DELETE",
       headers: {
           Authorization: `Token ${localStorage.getItem("lu_token")}`
@@ -47,7 +47,7 @@ export const DescriptionProvider = (props) => {
   }
 
   const editDescription = (description) => {
-    return fetch(`http://localhost:8000/descriptions/${description.id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/descriptions/${description.id}`, {
       method: 'PUT',
       headers: {
           "Content-Type": "application/json",

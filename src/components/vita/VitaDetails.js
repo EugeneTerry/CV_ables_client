@@ -1,15 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { VitaContext } from "./VitaProvider";
 import { EducationContext } from "../education/EducationProvider";
 import { ExperienceContext } from "../experience/ExperienceProvider";
 
 export const VitaDetails = (props) => {
-  const { getVitaById, deleteVita } = useContext(VitaContext);
+  const { getVitaById } = useContext(VitaContext);
   const { educations, getEducations } = useContext(EducationContext);
   const { experiences, getExperiences } = useContext(ExperienceContext)
   const [vita, setVita] = useState({})
-  const history = useNavigate()
   const { vitaId } = useParams();
 
   useEffect(() => {
@@ -18,12 +18,6 @@ export const VitaDetails = (props) => {
     getVitaById(vitaId).then(setVita)
   }, [vitaId]);
 
-  const handleRelease = () => {
-    deleteVita(vita.id)
-      .then(() => {
-        history("/vitas");
-      });
-  }
 
   return (
     <article className="container">
@@ -39,7 +33,7 @@ export const VitaDetails = (props) => {
                   <p className="contact-info">{vita.applicant.address}, {vita.applicant.city}{" "}{vita.applicant.state}.{" "}{vita?.applicant.zipcode}</p>
                   <p className="contact-info"><a href={`tel:${vita.applicant.phone}`}>{vita.applicant.phone}</a> | <a href={`mailto:${vita.applicant.user.email}`}>{vita.applicant.user.email}</a></p>
                   
-                  <p className="contact-info"><a href={`${vita.applicant.github_url}`} target="_blank">GitHub</a> | <a href={`${vita.applicant.linkedin_url}`}target="_blank">LinkedIn</a></p>
+                  <p className="contact-info"><a href={`${vita.applicant.github_url}`} target="_blank" rel="noreferrer">GitHub</a> | <a href={`${vita.applicant.linkedin_url}`}target="_blank" rel="noreferrer">LinkedIn</a></p>
 
                 </section>
                 <section className="vita-mission">

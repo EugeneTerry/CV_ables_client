@@ -6,7 +6,7 @@ export const VitaProvider = (props) => {
   const [vitas, setVita] = useState([]);
 
   const getVitas = () => {
-    return fetch("http://localhost:8000/vitas", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/vitas`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },
@@ -16,7 +16,7 @@ export const VitaProvider = (props) => {
   };
 
   const addVita = newVita => {
-    return fetch("http://localhost:8000/vitas", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/vitas`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const VitaProvider = (props) => {
     };
 
   const getVitaById = (id) => {
-    return fetch(`http://localhost:8000/vitas/${id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/vitas/${id}`, {
         headers: {
             Authorization: `Token ${localStorage.getItem("lu_token")}`
         }
@@ -37,7 +37,7 @@ export const VitaProvider = (props) => {
   }
 
   const deleteVita = (vitaID) => {
-    return fetch(`http://localhost:8000/vitas/${vitaID}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/vitas/${vitaID}`, {
       method: "DELETE",
       headers: {
           Authorization: `Token ${localStorage.getItem("lu_token")}`
@@ -47,7 +47,7 @@ export const VitaProvider = (props) => {
   }
 
   const editVita = (vita) => {
-    return fetch(`http://localhost:8000/vitas/${vita.id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/${vita.id}`, {
       method: 'PUT',
       headers: {
           "Content-Type": "application/json",

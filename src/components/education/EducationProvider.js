@@ -6,7 +6,7 @@ export const EducationProvider = (props) => {
   const [educations, setEducation] = useState([]);
 
   const getEducations = () => {
-    return fetch("http://localhost:8000/educations", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/educations`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },
@@ -16,7 +16,7 @@ export const EducationProvider = (props) => {
   };
 
   const addEducation = newEducation => {
-    return fetch("http://localhost:8000/educations", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/educations`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const EducationProvider = (props) => {
     };
 
   const getEducationById = (id) => {
-    return fetch(`http://localhost:8000/educations/${id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/educations/${id}`, {
         headers: {
             Authorization: `Token ${localStorage.getItem("lu_token")}`
         }
@@ -37,7 +37,7 @@ export const EducationProvider = (props) => {
   }
 
   const deleteEducation = (educationID) => {
-    return fetch(`http://localhost:8000/educations/${educationID}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/educations/${educationID}`, {
       method: "DELETE",
       headers: {
           Authorization: `Token ${localStorage.getItem("lu_token")}`
@@ -47,7 +47,7 @@ export const EducationProvider = (props) => {
   }
 
   const editEducation = (education) => {
-    return fetch(`http://localhost:8000/educations/${education.id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/educations/${education.id}`, {
       method: 'PUT',
       headers: {
           "Content-Type": "application/json",

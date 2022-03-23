@@ -6,7 +6,7 @@ export const FrameworkProvider = (props) => {
   const [frameworks, setFramework] = useState([]);
 
   const getFrameworks = () => {
-    return fetch("http://localhost:8000/frameworks", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/frameworks`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },

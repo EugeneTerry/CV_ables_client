@@ -6,7 +6,7 @@ export const ProspectProvider = (props) => {
   const [prospects, setProspect] = useState([]);
 
   const getProspects = () => {
-    return fetch("http://localhost:8000/prospects", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/prospects`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },
@@ -16,7 +16,7 @@ export const ProspectProvider = (props) => {
   };
 
   const addProspect = newProspect => {
-    return fetch("http://localhost:8000/prospects", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/prospects`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const ProspectProvider = (props) => {
     };
 
   const getProspectById = (id) => {
-    return fetch(`http://localhost:8000/prospects/${id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/prospects/${id}`, {
         headers: {
             Authorization: `Token ${localStorage.getItem("lu_token")}`
         }
@@ -37,7 +37,7 @@ export const ProspectProvider = (props) => {
   }
 
   const deleteProspect = (prospectID) => {
-    return fetch(`http://localhost:8000/prospects/${prospectID}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/prospects/${prospectID}`, {
       method: "DELETE",
       headers: {
           Authorization: `Token ${localStorage.getItem("lu_token")}`
@@ -47,7 +47,7 @@ export const ProspectProvider = (props) => {
   }
 
   const editProspect = (prospect) => {
-    return fetch(`http://localhost:8000/prospects/${prospect.id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/prospects/${prospect.id}`, {
       method: 'PUT',
       headers: {
           "Content-Type": "application/json",

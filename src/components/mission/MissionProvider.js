@@ -6,7 +6,7 @@ export const MissionProvider = (props) => {
   const [missions, setMission] = useState([]);
 
   const getMissions = () => {
-    return fetch("http://localhost:8000/missions", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/missions`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },
@@ -16,7 +16,7 @@ export const MissionProvider = (props) => {
   };
 
   const addMission = newMission => {
-    return fetch("http://localhost:8000/missions", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/missions`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const MissionProvider = (props) => {
     };
 
   const getMissionById = (id) => {
-    return fetch(`http://localhost:8000/missions/${id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/missions/${id}`, {
         headers: {
             Authorization: `Token ${localStorage.getItem("lu_token")}`
         }
@@ -37,7 +37,7 @@ export const MissionProvider = (props) => {
   }
 
   const deleteMission = (missionID) => {
-    return fetch(`http://localhost:8000/missions/${missionID}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/missions/${missionID}`, {
       method: "DELETE",
       headers: {
           Authorization: `Token ${localStorage.getItem("lu_token")}`
@@ -47,7 +47,7 @@ export const MissionProvider = (props) => {
   }
 
   const editMission = (mission) => {
-    return fetch(`http://localhost:8000/missions/${mission.id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/missions/${mission.id}`, {
       method: 'PUT',
       headers: {
           "Content-Type": "application/json",

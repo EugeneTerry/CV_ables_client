@@ -6,7 +6,7 @@ export const EducationVitaProvider = (props) => {
   const [educationvitas, setEducationVita] = useState([]);
 
   const getEducationVitas = () => {
-    return fetch("http://localhost:8000/educationvitas", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/educationvitas`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },
@@ -16,7 +16,7 @@ export const EducationVitaProvider = (props) => {
   };
 
   const addEducationVita = newEducationVita => {
-    return fetch("http://localhost:8000/educationvitas", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/educationvitas`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const EducationVitaProvider = (props) => {
     };
 
   const getEducationVitaById = (id) => {
-    return fetch(`http://localhost:8000/educationvitas/${id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/educationvitas/${id}`, {
         headers: {
             Authorization: `Token ${localStorage.getItem("lu_token")}`
         }
@@ -37,7 +37,7 @@ export const EducationVitaProvider = (props) => {
   }
 
   const deleteEducationVita = (educationvitaID) => {
-    return fetch(`http://localhost:8000/educationvitas/${educationvitaID}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/educationvitas/${educationvitaID}`, {
       method: "DELETE",
       headers: {
           Authorization: `Token ${localStorage.getItem("lu_token")}`
@@ -47,7 +47,7 @@ export const EducationVitaProvider = (props) => {
   }
 
   const editEducationVita = (educationvita) => {
-    return fetch(`http://localhost:8000/educationvitas/${educationvita.id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/educationvitas/${educationvita.id}`, {
       method: 'PUT',
       headers: {
           "Content-Type": "application/json",

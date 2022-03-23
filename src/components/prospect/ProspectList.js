@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ProspectContext } from "./ProspectProvider";
@@ -37,7 +38,7 @@ export const ProspectList = (props) => {
 
                 <th>{prospect.prospect_name}</th>
                 <td className="table-status">{prospect.prospectstatus.label}</td>
-                <td><a href={prospect.listing_url} target="_blank">📄</a></td>
+                <td><a href={prospect.listing_url} target="_blank" rel="noreferrer">📄</a></td>
                 <td className="table-notes">{prospect.notes}</td>
                 <td><Link
                   to={`/vitas/${prospect.markedvita}`}

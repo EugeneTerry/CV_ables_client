@@ -6,7 +6,7 @@ export const LanguageProvider = (props) => {
   const [languages, setLanguage] = useState([]);
 
   const getLanguages = () => {
-    return fetch("http://localhost:8000/languages", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/languages`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },

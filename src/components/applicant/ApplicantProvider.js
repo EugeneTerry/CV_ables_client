@@ -6,7 +6,7 @@ export const ApplicantProvider = (props) => {
   const [currentApplicant, setCurrentApplicant] = useState({});
 
   const getCurrentApplicant = () => {
-    return fetch("http://localhost:8000/profile", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/profile`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },
@@ -16,7 +16,7 @@ export const ApplicantProvider = (props) => {
   };
 
   const editCurrentApplicant = (currentApplicant) => {
-    return fetch(`http://localhost:8000/profile/${currentApplicant.id}`, {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/${currentApplicant.id}`, {
       method: 'PUT',
       headers: {
           "Content-Type": "application/json",

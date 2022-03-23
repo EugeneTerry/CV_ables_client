@@ -6,7 +6,7 @@ export const JobTypeProvider = (props) => {
   const [jobtypes, setJobType] = useState([]);
 
   const getJobTypes = () => {
-    return fetch("http://localhost:8000/jobtypes", {
+    return fetch(`${process.env.REACT_APP_DATABASE_URL}/jobtypes`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("lu_token")}`,
       },
